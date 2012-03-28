@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<definitions name="Ward"
+        targetNamespace="http://www.PAHospital.org/WardService/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+        xmlns:tns="http://www.PAHospital.org/WardService/"
+        xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:s0="http://www.PAHospital.org/WardService/"
+        xmlns:pat="http://www.PAHospital.org/PatService/"
+        >
+    <types>
+		<xsd:schema targetNamespace="http://www.PAHospital.org/WardService/">
+			<xsd:element name="PatientTreatmentOrder">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="PatientID" type="xsd:string" />
+						<xsd:element name="FirstName" type="xsd:string" />
+						<xsd:element name="LastName"  type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DischargeLetter" type="xsd:string" />
+		</xsd:schema>
+	</types>    
+        
+    <message name="WardOrderPatientTreatmentRequest">
+		<part name="PatientTreatmentOrder" element="s0:PatientTreatmentOrder" />
+	</message>
+	<message name="WardOrderPatientTreatmentResponse">
+		<part name="DischargeLetter" element="s0:DischargeLetter" />
+	</message>
+        
+    <portType name="Ward">
+		<operation name="OrderPatientTreatment">
+			<input message="s0:WardOrderPatientTreatmentRequest" />
+			<output message="s0:WardOrderPatientTreatmentResponse" />
+		</operation>
+	</portType>
+
+	<binding name="WardBinding" type="s0:Ward">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="OrderPatientTreatment">
+			<soap:operation soapAction="http://www.PAHospital.org/WardService/OrderPatientTreatment" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     SERVICE DEFINITION - A service groups a set of ports into
+     a service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <service name="Ward">
+    	<port name="WardPort" binding="s0:WardBinding">
+			<soap:address location="http://www.PAHospital.org/WardService/" />
+		</port>
+    </service>
+    
+</definitions>
