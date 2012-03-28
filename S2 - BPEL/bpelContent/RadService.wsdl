@@ -145,5 +145,9 @@
       <soap:address location="http://www.PAHospital.org/RadiologyService" />
     </port>
   </service>
+  	
+  <plnk:partnerLinkType name="RadiologyPLT">
+    <role name="RadiologyService" portType="s0:Radiology"></role>
+  </plnk:partnerLinkType>
   
 </definitions>

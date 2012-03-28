@@ -10,6 +10,6 @@
   </extensions>
   <extensions>
     <extendedObject href="Ward.bpel#/"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1332935955000"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1332938910000"/>
   </extensions>
 </extensionmodel:ExtensionMap>

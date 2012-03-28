@@ -6,6 +6,9 @@
          xmlns:ward="http://www.PAHospital.org/WardService/"
          xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
          xmlns:ts="http://www.PAHospital.org/TransportationService/"
+         xmlns:lab="http://www.PAHospital.org/LabService/"
+         xmlns:pat="http://www.PAHospital.org/PatService/"
+         xmlns:rad="http://www.PAHospital.org/RadiologyService/"
          >
          
     <!-- Import the client WSDL -->
@@ -13,6 +16,13 @@
 	        importType="http://schemas.xmlsoap.org/wsdl/" />
 	<bpel:import location="TranspService.wsdl" namespace="http://www.PAHospital.org/TransportationService/"
 			importType="http://schemas.xmlsoap.org/wsdl/" />
+	<bpel:import location="LabService.wsdl" namespace="http://www.PAHospital.org/LabService/"
+			importType="http://schemas.xmlsoap.org/wsdl/" />
+	<bpel:import location="PatService.wsdl" namespace="http://www.PAHospital.org/PatService/"
+			importType="http://schemas.xmlsoap.org/wsdl/" />
+	<bpel:import location="RadService.wsdl" namespace="http://www.PAHospital.org/RadiologyService/"
+			importType="http://schemas.xmlsoap.org/wsdl/" />
+			
 
     <!-- ================================================================= -->         
     <!-- ORCHESTRATION LOGIC                                               -->
@@ -20,9 +30,18 @@
     <!-- services integrated within this business process                  -->
     <!-- ================================================================= -->         
     <bpel:partnerLinks>
-        <bpel:partnerLink name="TransportService" 
+        <bpel:partnerLink name="Transportation" 
         	partnerLinkType="ts:TransportPLT"
         	myRole="TransportService"/>
+        <bpel:partnerLink name="Laboratory"
+        	partnerLinkType="lab:LaboratoryPLT"
+        	myRole="LaboratoryService" />
+        <bpel:partnerLink name="ElectronicPatientRecord"
+        	partnerLinkType="pat:PatientPLT"
+        	myRole="ElectronicPatientRecordService" />
+        <bpel:partnerLink name="Radiology"
+        	partnerLinkType="rad:RadiologyPLT"
+        	myRole="RadiologyService" />
     </bpel:partnerLinks>
     <bpel:sequence name="main">
 		<bpel:empty name="Empty"></bpel:empty>

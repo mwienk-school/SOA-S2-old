@@ -68,5 +68,9 @@
 			<soap:address location="http://www.PAHospital.org/LabService" />
 		</port>
 	</service>
+	
+	<plnk:partnerLinkType name="LaboratoryPLT">
+  		<role name="LaboratoryService" portType="s0:Laboratory"></role>
+  	</plnk:partnerLinkType>
 
 </definitions>

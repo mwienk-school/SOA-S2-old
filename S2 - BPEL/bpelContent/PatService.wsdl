@@ -222,5 +222,9 @@
       <soap:address location="http://www.PAHospital.org/PatService" />
     </port>
   </service>
+  
+  <plnk:partnerLinkType name="PatientPLT">
+    <role name="ElectronicPatientRecordService" portType="s0:ElectronicPatientRecord"></role>
+  </plnk:partnerLinkType>
 
 </definitions>
