@@ -7,21 +7,29 @@
          xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
          xmlns:ts="http://www.PAHospital.org/TransportationService/"
          xmlns:lab="http://www.PAHospital.org/LabService/"
+         xmlns:labcb="http://www.PAHospital.org/LabCallbackService/"
          xmlns:pat="http://www.PAHospital.org/PatService/"
          xmlns:rad="http://www.PAHospital.org/RadiologyService/"
+         xmlns:radcb="http://www.PAHospital.org/RadiologyCallbackService/"
          >
          
     <!-- Import the client WSDL -->
 	<bpel:import location="WardArtifacts.wsdl" namespace="http://www.PAHospital.org/WardService/" 
 	        importType="http://schemas.xmlsoap.org/wsdl/" />
+	        
+	<!-- Import the PartnerLink WSDLs -->
 	<bpel:import location="TranspService.wsdl" namespace="http://www.PAHospital.org/TransportationService/"
 			importType="http://schemas.xmlsoap.org/wsdl/" />
 	<bpel:import location="LabService.wsdl" namespace="http://www.PAHospital.org/LabService/"
+			importType="http://schemas.xmlsoap.org/wsdl/" />
+	<bpel:import location="LabService-callback.wsdl" namespace="http://www.PAHospital.org/LabCallbackService/"
 			importType="http://schemas.xmlsoap.org/wsdl/" />
 	<bpel:import location="PatService.wsdl" namespace="http://www.PAHospital.org/PatService/"
 			importType="http://schemas.xmlsoap.org/wsdl/" />
 	<bpel:import location="RadService.wsdl" namespace="http://www.PAHospital.org/RadiologyService/"
 			importType="http://schemas.xmlsoap.org/wsdl/" />
+	<bpel:import location="RadService-callback.wsdl" namespace="http://www.PAHospital.org/RadiologyCallbackService/"
+	        importType="http://schemas.xmlsoap.org/wsdl/" />
 			
 
     <!-- ================================================================= -->         
@@ -30,21 +38,77 @@
     <!-- services integrated within this business process                  -->
     <!-- ================================================================= -->         
     <bpel:partnerLinks>
-        <bpel:partnerLink name="Transportation" 
-        	partnerLinkType="ts:TransportPLT"
-        	myRole="TransportService"/>
-        <bpel:partnerLink name="Laboratory"
-        	partnerLinkType="lab:LaboratoryPLT"
-        	myRole="LaboratoryService" />
-        <bpel:partnerLink name="ElectronicPatientRecord"
-        	partnerLinkType="pat:PatientPLT"
-        	myRole="ElectronicPatientRecordService" />
-        <bpel:partnerLink name="Radiology"
-        	partnerLinkType="rad:RadiologyPLT"
-        	myRole="RadiologyService" />
-    </bpel:partnerLinks>
-    <bpel:sequence name="main">
-		<bpel:empty name="Empty"></bpel:empty>
-	</bpel:sequence>    
+    	<bpel:partnerLink name="WardService"
+    		partnerLinkType="ward:WardPLT" myRole="WardService"/>
+        <bpel:partnerLink name="TranspService" 
+        	partnerLinkType="ward:TransportPLT" partnerRole="TransportService"/>
+        <bpel:partnerLink name="LabService"
+        	partnerLinkType="ward:LaboratoryPLT" partnerRole="LaboratoryService" myRole="LaboratoryRequester"/>
+        <bpel:partnerLink name="PatService"
+        	partnerLinkType="ward:PatientPLT" partnerRole="ElectronicPatientRecordService"/>
+        <bpel:partnerLink name="RadService"
+        	partnerLinkType="ward:RadiologyPLT"
+        	partnerRole="RadiologyService" myRole="RadiologyRequester"/>
+        
+    </bpel:partnerLinks>   
+     
+    <bpel:variables>
+        <bpel:variable name="WardServiceRequest" messageType="ward:WardOrderPatientTreatmentRequest"></bpel:variable>
+        <bpel:variable name="GetPatientIDRequest" messageType="pat:GetPatientIDsRequest"></bpel:variable>
+        <bpel:variable name="GetPatientIDResponse" messageType="pat:GetPatientIDsResponse"></bpel:variable>
+        <bpel:variable name="OrderLabTestRequest" messageType="lab:LaboratoryOrderLabTestRequest"></bpel:variable>
+        <bpel:variable name="OrderLabTestResponse" messageType="lab:LaboratoryOrderLabTestResponse"></bpel:variable>
+        <bpel:variable name="LabSampleTransportRequest" messageType="ts:OrderSampleTransportRequest"></bpel:variable>
+        <bpel:variable name="LabReportResponse" messageType="labcb:SendLabReportResponse"></bpel:variable>
+        <bpel:variable name="StoreLabReportRequest" messageType="pat:StoreLabReportRequest"></bpel:variable>
+        <bpel:variable name="OrderRadiologyExamRequest" messageType="rad:RadiologyOrderRadExaminationRequest"></bpel:variable>
+        <bpel:variable name="OrderRadiologyExamResponse" messageType="rad:RadiologyOrderRadExaminationResponse"></bpel:variable>
+        <bpel:variable name="RadiologyAppointmentRequest" messageType="rad:RadiologyRequestAppointmentRequest"></bpel:variable>
+        <bpel:variable name="RadiologyAppointmentResponse" messageType="rad:RadiologyRequestAppointmentResponse"></bpel:variable>
+        <bpel:variable name="RadPatientTransportRequest" messageType="ts:OrderPatientTransportRequest"></bpel:variable>
+        <bpel:variable name="RadiologyReportResponse" messageType="radcb:RadiologyReportRequest"></bpel:variable>
+        <bpel:variable name="StoreRadiologyReportRequest" messageType="pat:StoreRadiologyReportRequest"></bpel:variable>
+        <bpel:variable name="WardServiceResponse" messageType="ward:WardOrderPatientTreatmentResponse"></bpel:variable>
+    </bpel:variables>
+    <bpel:sequence name="main"><bpel:receive name="Receive-AdmissionOrder" partnerLink="WardService" operation="OrderPatientTreatment" variable="WardServiceRequest" createInstance="yes"></bpel:receive>
+        <bpel:assign validate="no" name="Assign-Patient">
+            <bpel:copy>
+                <bpel:from part="PatientTreatmentOrder" variable="WardServiceRequest">
+                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[PatientName]]>
+                    </bpel:query>
+                </bpel:from>
+                <bpel:to part="PatientName" variable="GetPatientIDRequest"></bpel:to>
+            </bpel:copy>
+        </bpel:assign>
+        <bpel:invoke name="Invoke-GetPatientID" partnerLink="PatService" operation="GetPatientIDsByName" inputVariable="GetPatientIDRequest" outputVariable="GetPatientIDResponse"></bpel:invoke>
+        <bpel:flow name="Flow"><bpel:sequence name="Radiology">
+                <bpel:invoke name="Invoke-RadiologyExam" partnerLink="RadService" operation="OrderRadiologyExamination" portType="rad:Radiology" inputVariable="OrderRadiologyExamRequest" outputVariable="OrderRadiologyExamResponse"></bpel:invoke>
+                <bpel:assign validate="no" name="Assign-RadiologyOrder">
+                    <bpel:copy>
+                        <bpel:from part="RadiologyOrderID" variable="OrderRadiologyExamResponse"></bpel:from>
+                        <bpel:to part="RadiologyAppointmentRequest" variable="RadiologyAppointmentRequest">
+                            <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                <![CDATA[OrderID]]>
+                            </bpel:query>
+                        </bpel:to>
+                    </bpel:copy>
+                </bpel:assign>
+                <bpel:invoke name="Invoke-RadiologyAppointment" partnerLink="RadService" operation="RequestAppointment" portType="rad:Radiology" inputVariable="RadiologyAppointmentRequest" outputVariable="RadiologyAppointmentResponse"></bpel:invoke>
+                <bpel:invoke name="Invoke-TransportPatient" partnerLink="TranspService" operation="OrderPatientTransport" inputVariable="RadPatientTransportRequest"></bpel:invoke>
+                <bpel:receive name="Receive-RadiologyReport" partnerLink="RadService" operation="SendRadiologyReport" variable="RadiologyReportResponse"></bpel:receive>
+                
+                <bpel:invoke name="Invoke-StoreReport" partnerLink="PatService" operation="StoreRadiologyReport" portType="pat:ElectronicPatientRecord" inputVariable="StoreRadiologyReportRequest"></bpel:invoke>
+            </bpel:sequence><bpel:sequence name="Laboratory">
+                <bpel:invoke name="Invoke-OrderLabTest" partnerLink="LabService" operation="OrderLabTest" portType="lab:Laboratory" inputVariable="OrderLabTestRequest" outputVariable="OrderLabTestResponse"></bpel:invoke>
+                <bpel:invoke name="Invoke-OrderSampleTransport" partnerLink="TranspService" operation="OrderSampleTransport" portType="ts:Transportation" inputVariable="LabSampleTransportRequest">
+                </bpel:invoke>
+                <bpel:receive name="Receive-LabReport" partnerLink="LabService" operation="SendLabReport" variable="LabReportResponse"></bpel:receive>
+                <bpel:invoke name="Invoke-StoreReport" partnerLink="PatService" operation="StoreLabReport" portType="pat:ElectronicPatientRecord" inputVariable="StoreLabReportRequest"></bpel:invoke>
+            </bpel:sequence></bpel:flow>
+    
+        
+        <bpel:reply name="Reply" partnerLink="WardService" operation="OrderPatientTreatment" variable="WardServiceResponse"></bpel:reply>
+    </bpel:sequence>
 </bpel:process>
 

@@ -7,16 +7,48 @@
         xmlns="http://schemas.xmlsoap.org/wsdl/"
         xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
         xmlns:s0="http://www.PAHospital.org/WardService/"
+		xmlns:ts="http://www.PAHospital.org/TransportationService/"
+        xmlns:lab="http://www.PAHospital.org/LabService/"
+        xmlns:labcb="http://www.PAHospital.org/LabCallbackService/"
         xmlns:pat="http://www.PAHospital.org/PatService/"
+        xmlns:rad="http://www.PAHospital.org/RadiologyService/"
+        xmlns:radcb="http://www.PAHospital.org/RadiologyCallbackService/"
         >
+        
+    <!--  Imports -->
+    <import location="TranspService.wsdl" namespace="http://www.PAHospital.org/TransportationService/" />
+    <import location="LabService.wsdl" namespace="http://www.PAHospital.org/LabService/" />
+    <import location="LabService-callback.wsdl" namespace="http://www.PAHospital.org/LabCallbackService/" />
+    <import location="PatService.wsdl" namespace="http://www.PAHospital.org/PatService/" />
+    <import location="RadService.wsdl" namespace="http://www.PAHospital.org/RadiologyService/" />
+    <import location="RadService-callback.wsdl" namespace="http://www.PAHospital.org/RadiologyCallbackService/" />
+    
+    <!--  PartnerLinkTypes -->
+    <plnk:partnerLinkType name="WardPLT">
+  		<role name="WardService" portType="tns:Ward"></role>
+  	</plnk:partnerLinkType>
+	<plnk:partnerLinkType name="TransportPLT">
+		<role name="TransportService" portType="ts:Transportation" />
+	</plnk:partnerLinkType>
+    <plnk:partnerLinkType name="LaboratoryPLT">
+		<role name="LaboratoryService" portType="lab:Laboratory" />
+		<role name="LaboratoryRequester" portType="labcb:LabCallback" />
+	</plnk:partnerLinkType>
+	<plnk:partnerLinkType name="PatientPLT">
+		<role name="ElectronicPatientRecordService" portType="pat:ElectronicPatientRecord" />
+	</plnk:partnerLinkType>
+	<plnk:partnerLinkType name="RadiologyPLT">
+		<role name="RadiologyService" portType="rad:Radiology" />
+		<role name="RadiologyRequester" portType="radcb:RadiologyCallback" />
+	</plnk:partnerLinkType>
+	
     <types>
 		<xsd:schema targetNamespace="http://www.PAHospital.org/WardService/">
 			<xsd:element name="PatientTreatmentOrder">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="PatientID" type="xsd:string" />
-						<xsd:element name="FirstName" type="xsd:string" />
-						<xsd:element name="LastName"  type="xsd:string" />
+						<xsd:element name="PatientName" type="xsd:string" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>

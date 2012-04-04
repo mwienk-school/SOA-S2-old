@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
-	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
-	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
-	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
-	xmlns:s0="http://www.PAHospital.org/LabService/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s0="http://www.PAHospital.org/LabService/"
 	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
 	targetNamespace="http://www.PAHospital.org/LabService/">
 
@@ -68,9 +65,5 @@
 			<soap:address location="http://www.PAHospital.org/LabService" />
 		</port>
 	</service>
-	
-	<plnk:partnerLinkType name="LaboratoryPLT">
-  		<role name="LaboratoryService" portType="s0:Laboratory"></role>
-  	</plnk:partnerLinkType>
 
 </definitions>
