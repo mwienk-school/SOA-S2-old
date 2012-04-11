@@ -1,36 +1,28 @@
 <?xml version="1.0"?>
-<definitions name="Ward"
-        targetNamespace="http://www.PAHospital.org/WardService/"
-        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-        xmlns:tns="http://www.PAHospital.org/WardService/"
-        xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
-        xmlns="http://schemas.xmlsoap.org/wsdl/"
-        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-        xmlns:s0="http://www.PAHospital.org/WardService/"
-		xmlns:ts="http://www.PAHospital.org/TransportationService/"
-        xmlns:lab="http://www.PAHospital.org/LabService/"
-        xmlns:labcb="http://www.PAHospital.org/LabCallbackService/"
-        xmlns:pat="http://www.PAHospital.org/PatService/"
-        xmlns:rad="http://www.PAHospital.org/RadiologyService/"
-        xmlns:radcb="http://www.PAHospital.org/RadiologyCallbackService/"
-        >
-        
-    <!--  Imports -->
-    <import location="TranspService.wsdl" namespace="http://www.PAHospital.org/TransportationService/" />
-    <import location="LabService.wsdl" namespace="http://www.PAHospital.org/LabService/" />
-    <import location="LabService-callback.wsdl" namespace="http://www.PAHospital.org/LabCallbackService/" />
-    <import location="PatService.wsdl" namespace="http://www.PAHospital.org/PatService/" />
-    <import location="RadService.wsdl" namespace="http://www.PAHospital.org/RadiologyService/" />
-    <import location="RadService-callback.wsdl" namespace="http://www.PAHospital.org/RadiologyCallbackService/" />
-    
-    <!--  PartnerLinkTypes -->
-    <plnk:partnerLinkType name="WardPLT">
-  		<role name="WardService" portType="tns:Ward"></role>
-  	</plnk:partnerLinkType>
+<definitions name="Ward" targetNamespace="http://www.PAHospital.org/WardService/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.PAHospital.org/WardService/"
+	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s0="http://www.PAHospital.org/WardService/"
+	xmlns:ts="http://www.PAHospital.org/TransportationService/" xmlns:lab="http://www.PAHospital.org/LabService/"
+	xmlns:labcb="http://www.PAHospital.org/LabCallbackService/" xmlns:pat="http://www.PAHospital.org/PatService/"
+	xmlns:rad="http://www.PAHospital.org/RadiologyService/" xmlns:radcb="http://www.PAHospital.org/RadiologyCallbackService/">
+
+	<!-- Imports -->
+	<import location="TranspService.wsdl" namespace="http://www.PAHospital.org/TransportationService/" />
+	<import location="LabService.wsdl" namespace="http://www.PAHospital.org/LabService/" />
+	<import location="LabService-callback.wsdl" namespace="http://www.PAHospital.org/LabCallbackService/" />
+	<import location="PatService.wsdl" namespace="http://www.PAHospital.org/PatService/" />
+	<import location="RadService.wsdl" namespace="http://www.PAHospital.org/RadiologyService/" />
+	<import location="RadService-callback.wsdl" namespace="http://www.PAHospital.org/RadiologyCallbackService/" />
+
+	<!-- PartnerLinkTypes -->
+	<plnk:partnerLinkType name="WardPLT">
+		<role name="WardService" portType="tns:Ward"></role>
+	</plnk:partnerLinkType>
 	<plnk:partnerLinkType name="TransportPLT">
 		<role name="TransportService" portType="ts:Transportation" />
 	</plnk:partnerLinkType>
-    <plnk:partnerLinkType name="LaboratoryPLT">
+	<plnk:partnerLinkType name="LaboratoryPLT">
 		<role name="LaboratoryService" portType="lab:Laboratory" />
 		<role name="LaboratoryRequester" portType="labcb:LabCallback" />
 	</plnk:partnerLinkType>
@@ -41,8 +33,9 @@
 		<role name="RadiologyService" portType="rad:Radiology" />
 		<role name="RadiologyRequester" portType="radcb:RadiologyCallback" />
 	</plnk:partnerLinkType>
-	
-    <types>
+
+    <!--  Ward types definitions -->
+	<types>
 		<xsd:schema targetNamespace="http://www.PAHospital.org/WardService/">
 			<xsd:element name="PatientTreatmentOrder">
 				<xsd:complexType>
@@ -53,23 +46,50 @@
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:element name="DischargeLetter" type="xsd:string" />
+			<xsd:element name="PaymentRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="amount" type="xsd:string" />
+						<xsd:element name="date" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
 		</xsd:schema>
-	</types>    
-        
-    <message name="WardOrderPatientTreatmentRequest">
+	</types>
+
+    <!-- Ward message definitions -->
+	<message name="WardOrderPatientTreatmentRequest">
 		<part name="PatientTreatmentOrder" element="tns:PatientTreatmentOrder" />
 	</message>
 	<message name="WardOrderPatientTreatmentResponse">
 		<part name="DischargeLetter" element="tns:DischargeLetter" />
 	</message>
-        
-    <portType name="Ward">
+	<message name="WardPaymentRequest">
+		<part name="PaymentRequest" element="tns:PaymentRequest"/>
+	</message>
+	<message name="WardDischargeLetter">
+		<part name="DischargeLetter" element="tns:DischargeLetter" />
+	</message>
+	<message name="WardReviewReports">
+		<part name="LabReport" element="radcb:RadiologyReport" />
+		<part name="RadReport" element="labcb:LabReport" />
+	</message>
+
+	<!--  Ward portType (operations) definitions -->
+	<portType name="Ward">
 		<operation name="OrderPatientTreatment">
 			<input message="tns:WardOrderPatientTreatmentRequest" />
 			<output message="tns:WardOrderPatientTreatmentResponse" />
 		</operation>
+		<operation name="ReceivePayment">
+			<input message="tns:WardPaymentRequest" />
+		</operation>
+		<operation name="ReceiveDischargeLetter">
+			<input message="tns:WardDischargeLetter" />
+		</operation>
 	</portType>
 
+	<!--  Ward binding -->
 	<binding name="WardBinding" type="tns:Ward">
 		<soap:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
@@ -82,16 +102,25 @@
 				<soap:body use="literal" />
 			</output>
 		</operation>
+		<operation name="ReceivePayment">
+			<soap:operation soapAction="http://www.PAHospital.org/WardService/ReceivePayment" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
+		<operation name="ReceiveDischargeLetter">
+			<soap:operation soapAction="http://www.PAHospital.org/WardService/ReceiveDischargeLetter" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
 	</binding>
-	
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     SERVICE DEFINITION - A service groups a set of ports into
-     a service unit.
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <service name="Ward">
-    	<port name="WardPort" binding="tns:WardBinding">
+
+	<!-- Ward service definition -->
+	<service name="Ward">
+		<port name="WardPort" binding="tns:WardBinding">
 			<soap:address location="http://www.PAHospital.org/WardService/" />
 		</port>
-    </service>
-    
+	</service>
+
 </definitions>
