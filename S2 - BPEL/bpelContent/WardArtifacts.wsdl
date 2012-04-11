@@ -57,20 +57,20 @@
 	</types>    
         
     <message name="WardOrderPatientTreatmentRequest">
-		<part name="PatientTreatmentOrder" element="s0:PatientTreatmentOrder" />
+		<part name="PatientTreatmentOrder" element="tns:PatientTreatmentOrder" />
 	</message>
 	<message name="WardOrderPatientTreatmentResponse">
-		<part name="DischargeLetter" element="s0:DischargeLetter" />
+		<part name="DischargeLetter" element="tns:DischargeLetter" />
 	</message>
         
     <portType name="Ward">
 		<operation name="OrderPatientTreatment">
-			<input message="s0:WardOrderPatientTreatmentRequest" />
-			<output message="s0:WardOrderPatientTreatmentResponse" />
+			<input message="tns:WardOrderPatientTreatmentRequest" />
+			<output message="tns:WardOrderPatientTreatmentResponse" />
 		</operation>
 	</portType>
 
-	<binding name="WardBinding" type="s0:Ward">
+	<binding name="WardBinding" type="tns:Ward">
 		<soap:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="OrderPatientTreatment">
@@ -89,7 +89,7 @@
      a service unit.
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <service name="Ward">
-    	<port name="WardPort" binding="s0:WardBinding">
+    	<port name="WardPort" binding="tns:WardBinding">
 			<soap:address location="http://www.PAHospital.org/WardService/" />
 		</port>
     </service>
