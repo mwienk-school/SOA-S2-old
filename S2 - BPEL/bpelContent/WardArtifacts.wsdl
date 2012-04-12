@@ -17,21 +17,21 @@
 
 	<!-- PartnerLinkTypes -->
 	<plnk:partnerLinkType name="WardPLT">
-		<role name="WardService" portType="tns:Ward"></role>
+		<plnk:role name="WardService" portType="tns:Ward" />
 	</plnk:partnerLinkType>
 	<plnk:partnerLinkType name="TransportPLT">
-		<role name="TransportService" portType="ts:Transportation" />
+		<plnk:role name="TransportService" portType="ts:Transportation"  />
 	</plnk:partnerLinkType>
 	<plnk:partnerLinkType name="LaboratoryPLT">
-		<role name="LaboratoryService" portType="lab:Laboratory" />
-		<role name="LaboratoryRequester" portType="labcb:LabCallback" />
+		<plnk:role name="LaboratoryService" portType="lab:Laboratory" />
+		<plnk:role name="LaboratoryRequester" portType="labcb:LabCallback" />
 	</plnk:partnerLinkType>
 	<plnk:partnerLinkType name="PatientPLT">
-		<role name="ElectronicPatientRecordService" portType="pat:ElectronicPatientRecord" />
+		<plnk:role name="ElectronicPatientRecordService" portType="pat:ElectronicPatientRecord" />
 	</plnk:partnerLinkType>
 	<plnk:partnerLinkType name="RadiologyPLT">
-		<role name="RadiologyService" portType="rad:Radiology" />
-		<role name="RadiologyRequester" portType="radcb:RadiologyCallback" />
+		<plnk:role name="RadiologyService" portType="rad:Radiology" />
+		<plnk:role name="RadiologyRequester" portType="radcb:RadiologyCallback" />
 	</plnk:partnerLinkType>
 
     <!--  Ward types definitions -->
@@ -119,7 +119,8 @@
 	<!-- Ward service definition -->
 	<service name="Ward">
 		<port name="WardPort" binding="tns:WardBinding">
-			<soap:address location="http://www.PAHospital.org/WardService/" />
+			<!-- <soap:address location="http://www.PAHospital.org/WardService/" /> -->
+			<soap:address location="http://localhost:8080/ode/processes/WardService/" />
 		</port>
 	</service>
 

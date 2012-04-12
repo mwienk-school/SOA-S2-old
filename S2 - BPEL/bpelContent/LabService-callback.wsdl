@@ -56,7 +56,7 @@
   <!-- Service defines the address of Web service -->
   <service name="LabCallbackService">
     <port name="LabCallbackPort" binding="s0:LabCallbackBinding">
-      <soap:address location="http://www.PAHospital.org/LabCallbackService" />
+      <soap:address location="http://localhost:8080/ode/processes/LabCallbackService" />
     </port>
   </service>
   

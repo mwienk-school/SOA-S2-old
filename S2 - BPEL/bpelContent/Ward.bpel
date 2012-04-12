@@ -95,7 +95,7 @@
 			         operation="GetPatientIDsByName" inputVariable="GetPatientIDRequest"
 			         outputVariable="GetPatientIDResponse" />
 		<bpel:if name="If-PatientExists">
-			<bpel:condition><![CDATA[number($GetPatientIDResponse.PatientIDsList/PatientID)]]></bpel:condition>
+			<bpel:condition><![CDATA[number($GetPatientIDResponse.PatientIDsList/PatientID) = $GetPatientIDResponse.PatientIDsList/PatientID]]></bpel:condition>
 			<bpel:sequence name="ExistingPatient">
 				<bpel:assign validate="no" name="Assign-PatientID">
 					<bpel:copy>

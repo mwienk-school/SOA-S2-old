@@ -49,7 +49,7 @@
   <!-- Service defines the address of Web service -->
   <service name="RadiologyCallbackService">
     <port name="RadiologyCallbackPort" binding="s0:RadiologyCallbackBinding">
-      <soap:address location="http://www.PAHospital.org/RadiologyCallbackService" />
+      <soap:address location="http://localhost:8080/ode/processes/RadiologyCallbackService" />
     </port>
   </service>
 
