@@ -140,7 +140,7 @@
 	<!-- Service defines the address of Web service -->
 	<service name="RadiologyService">
 		<port name="RadiologyPort" binding="s0:RadiologyBinding">
-			<soap:address location="http://localhost:9080/RadiologyService" />
+			<soap:address location="http://localhost:9080/S2_-_RAD/services/RadiologyService" />
 		</port>
 	</service>
 

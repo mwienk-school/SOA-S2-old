@@ -62,7 +62,7 @@
   <!-- Service defines the address of Web service -->
   <service name="LabService">
     <port name="LabPort" binding="s0:LabBinding">
-      <soap:address location="http://localhost:9080/LabService" />
+      <soap:address location="http://localhost:9080/S2_-_LAB/services/LabService" />
     </port>
   </service>
   

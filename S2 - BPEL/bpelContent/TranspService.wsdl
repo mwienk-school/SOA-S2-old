@@ -68,7 +68,7 @@
 	<!-- Service defines the address of Web service -->
 	<service name="TransportationService">
 		<port name="TransportationPort" binding="s0:TransportationBinding">
-			<soap:address location="http://localhost:9080/TransportationService" />
+			<soap:address location="http://localhost:9080/S2_-_TRANS/services/TransportationService" />
 		</port>
 	</service>
 
