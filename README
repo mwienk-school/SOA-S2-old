@@ -30,5 +30,6 @@ Download derby van de apache website (db.apache.org/derby)
         //db.createLabReport(conn);
         //db.createPatientRecord(conn);
         //db.createRadiologyRecord(conn);
-5. Zoniet, dan succes :-S
+5. Vergeet niet om de derby.jar in de lib map van  Tomcat te zetten.
+6. Zoniet, dan succes :-S
 
