@@ -8,19 +8,21 @@
 	xmlns:rad="http://www.PAHospital.org/RadiologyService/" xmlns:radcb="http://www.PAHospital.org/RadiologyCallbackService/">
 
 	<!-- Imports -->
-	<import location="TranspService.wsdl" namespace="http://www.PAHospital.org/TransportationService/" />
+	<import location="TranspService.wsdl"
+		namespace="http://www.PAHospital.org/TransportationService/" />
 	<import location="LabService.wsdl" namespace="http://www.PAHospital.org/LabService/" />
 	<import location="LabService-callback.wsdl" namespace="http://www.PAHospital.org/LabCallbackService/" />
 	<import location="PatService.wsdl" namespace="http://www.PAHospital.org/PatService/" />
 	<import location="RadService.wsdl" namespace="http://www.PAHospital.org/RadiologyService/" />
-	<import location="RadService-callback.wsdl" namespace="http://www.PAHospital.org/RadiologyCallbackService/" />
+	<import location="RadService-callback.wsdl"
+		namespace="http://www.PAHospital.org/RadiologyCallbackService/" />
 
 	<!-- PartnerLinkTypes -->
 	<plnk:partnerLinkType name="WardPLT">
 		<plnk:role name="WardService" portType="tns:Ward" />
 	</plnk:partnerLinkType>
 	<plnk:partnerLinkType name="TransportPLT">
-		<plnk:role name="TransportService" portType="ts:Transportation"  />
+		<plnk:role name="TransportService" portType="ts:Transportation" />
 	</plnk:partnerLinkType>
 	<plnk:partnerLinkType name="LaboratoryPLT">
 		<plnk:role name="LaboratoryService" portType="lab:Laboratory" />
@@ -34,7 +36,7 @@
 		<plnk:role name="RadiologyRequester" portType="radcb:RadiologyCallback" />
 	</plnk:partnerLinkType>
 
-    <!--  Ward types definitions -->
+	<!-- Ward types definitions -->
 	<types>
 		<xsd:schema targetNamespace="http://www.PAHospital.org/WardService/">
 			<xsd:element name="PatientTreatmentOrder">
@@ -45,8 +47,14 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="DischargeLetter" type="xsd:string" />
-			<xsd:element name="PaymentRequest">
+			<xsd:element name="DischargeLetter">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="name" type="xsd:string" />
+						<xsd:element name="message" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>			<xsd:element name="PaymentRequest">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="amount" type="xsd:string" />
@@ -57,7 +65,7 @@
 		</xsd:schema>
 	</types>
 
-    <!-- Ward message definitions -->
+	<!-- Ward message definitions -->
 	<message name="WardOrderPatientTreatmentRequest">
 		<part name="PatientTreatmentOrder" element="tns:PatientTreatmentOrder" />
 	</message>
@@ -65,7 +73,7 @@
 		<part name="DischargeLetter" element="tns:DischargeLetter" />
 	</message>
 	<message name="WardPaymentRequest">
-		<part name="PaymentRequest" element="tns:PaymentRequest"/>
+		<part name="PaymentRequest" element="tns:PaymentRequest" />
 	</message>
 	<message name="WardDischargeLetter">
 		<part name="DischargeLetter" element="tns:DischargeLetter" />
@@ -75,7 +83,7 @@
 		<part name="RadReport" element="labcb:LabReport" />
 	</message>
 
-	<!--  Ward portType (operations) definitions -->
+	<!-- Ward portType (operations) definitions -->
 	<portType name="Ward">
 		<operation name="OrderPatientTreatment">
 			<input message="tns:WardOrderPatientTreatmentRequest" />
@@ -89,12 +97,13 @@
 		</operation>
 	</portType>
 
-	<!--  Ward binding -->
+	<!-- Ward binding -->
 	<binding name="WardBinding" type="tns:Ward">
 		<soap:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="OrderPatientTreatment">
-			<soap:operation soapAction="http://www.PAHospital.org/WardService/OrderPatientTreatment" />
+			<soap:operation
+				soapAction="http://www.PAHospital.org/WardService/OrderPatientTreatment" />
 			<input>
 				<soap:body use="literal" />
 			</input>
@@ -103,13 +112,15 @@
 			</output>
 		</operation>
 		<operation name="ReceivePayment">
-			<soap:operation soapAction="http://www.PAHospital.org/WardService/ReceivePayment" />
+			<soap:operation
+				soapAction="http://www.PAHospital.org/WardService/ReceivePayment" />
 			<input>
 				<soap:body use="literal" />
 			</input>
 		</operation>
 		<operation name="ReceiveDischargeLetter">
-			<soap:operation soapAction="http://www.PAHospital.org/WardService/ReceiveDischargeLetter" />
+			<soap:operation
+				soapAction="http://www.PAHospital.org/WardService/ReceiveDischargeLetter" />
 			<input>
 				<soap:body use="literal" />
 			</input>

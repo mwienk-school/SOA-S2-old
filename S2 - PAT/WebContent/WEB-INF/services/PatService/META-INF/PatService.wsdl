@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions targetNamespace="http://www.PAHospital.org/PatService/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s0="http://www.PAHospital.org/PatService/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/">
+<definitions targetNamespace="http://www.PAHospital.org/PatService/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s0="http://www.PAHospital.org/PatService/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/">
   <types>
     <xsd:schema targetNamespace="http://www.PAHospital.org/PatService/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
       <xsd:element name="Patient">
@@ -219,7 +219,7 @@
   </binding>
   <service name="PatService">
     <port name="PatientRecordPort" binding="s0:PatientRecordBinding">
-      <soap:address location="http://www.PAHospital.org/PatService"/>
+      <soap:address location="http://localhost:9080/PatService"/>
     </port>
   </service>
 </definitions>

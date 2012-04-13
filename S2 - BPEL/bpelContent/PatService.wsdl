@@ -214,7 +214,7 @@
 	<!-- Service defines the address of Web service -->
 	<service name="PatService">
 		<port name="PatientRecordPort" binding="s0:PatientRecordBinding">
-			<soap:address location="http://www.PAHospital.org/PatService" />
+			<soap:address location="http://localhost:9080/S2_-_PAT/services/PatService/" />
 		</port>
 	</service>
 
