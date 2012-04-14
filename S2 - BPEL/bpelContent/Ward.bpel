@@ -383,42 +383,39 @@
 					inputVariable="StoreLabReportRequest" />
 			</bpel:sequence>
 		</bpel:flow>
-        
-        
-        <bpel:flow name="Flow-Review">
-        	<bpel:sequence name="ReviewReports">
-            	<bpel:receive name="Receive-DischargeLetter" partnerLink="WardService" 
-            	              operation="ReceiveDischargeLetter" portType="ward:Ward" variable="WardServiceReceiveDischargeLetter" />
-            </bpel:sequence>
-            <bpel:sequence name="Payment"><bpel:receive name="Receive-Payment" partnerLink="WardService" operation="ReceivePayment" portType="ward:Ward" variable="WardServicePaymentRequest" />
-            
-        </bpel:sequence>
-        </bpel:flow>
-        
-        <bpel:assign validate="no" name="Assign-Discharge">
-            
-            
-            
-            <bpel:copy>
-                <bpel:from>
-                    <bpel:literal>
-                        <s0:DischargeLetter xmlns:s0="http://www.PAHospital.org/WardService/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><name>name</name>
-  <message>message</message>
 
-                        </s0:DischargeLetter>
-                    </bpel:literal>
-                </bpel:from>
-                <bpel:to variable="WardServiceResponse" part="DischargeLetter"></bpel:to>
-            </bpel:copy>
-            <bpel:copy>
-                <bpel:from part="DischargeLetter" variable="WardServiceReceiveDischargeLetter">
-                </bpel:from>
-                <bpel:to part="DischargeLetter" variable="WardServiceResponse">
-                </bpel:to>
-            </bpel:copy>
-            
-        </bpel:assign>
-        <bpel:reply name="Reply-DischargeLetter" partnerLink="WardService"
-			        operation="OrderPatientTreatment" variable="WardServiceResponse" />
+<!-- 		<bpel:flow name="Flow-Review"> -->
+<!-- 			<bpel:sequence name="ReviewReports"> -->
+<!-- 				<bpel:receive name="Receive-DischargeLetter" -->
+<!-- 					partnerLink="WardService" operation="ReceiveDischargeLetter" -->
+<!-- 					portType="ward:Ward" variable="WardServiceReceiveDischargeLetter" /> -->
+<!-- 			</bpel:sequence> -->
+<!-- 			<bpel:sequence name="Payment"> -->
+<!-- 				<bpel:receive name="Receive-Payment" partnerLink="WardService" -->
+<!-- 					operation="ReceivePayment" portType="ward:Ward" variable="WardServicePaymentRequest" /> -->
+<!-- 			</bpel:sequence> -->
+<!-- 		</bpel:flow> -->
+		<bpel:assign validate="no" name="Assign-Discharge">
+			<bpel:copy>
+				<bpel:from>
+					<bpel:literal>
+						<s0:DischargeLetter xmlns:s0="http://www.PAHospital.org/WardService/"
+							xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+							<name>name</name>
+							<message>message</message>
+						</s0:DischargeLetter>
+					</bpel:literal>
+				</bpel:from>
+				<bpel:to variable="WardServiceResponse" part="DischargeLetter"></bpel:to>
+			</bpel:copy>
+			<bpel:copy>
+				<bpel:from part="DischargeLetter" variable="WardServiceReceiveDischargeLetter">
+				</bpel:from>
+				<bpel:to part="DischargeLetter" variable="WardServiceResponse">
+				</bpel:to>
+			</bpel:copy>
+		</bpel:assign>
+		<bpel:reply name="Reply-DischargeLetter" partnerLink="WardService"
+			operation="OrderPatientTreatment" variable="WardServiceResponse" />
 	</bpel:sequence>
 </bpel:process>

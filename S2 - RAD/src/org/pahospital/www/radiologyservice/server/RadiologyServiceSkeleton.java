@@ -36,6 +36,7 @@ public class RadiologyServiceSkeleton implements RadiologyServiceSkeletonInterfa
 	 */
 
 	public Appointment requestAppointment(Appointment appointment) throws SOAPException {
+		System.out.println("RAD ==> Appointment Request");
 		Appointment result = null;
 		if(orderList.containsKey(appointment.getOrderID())) {
 			//Insert the appointment
@@ -58,6 +59,7 @@ public class RadiologyServiceSkeleton implements RadiologyServiceSkeletonInterfa
 	 * @throws SOAPException 
 	 */
 	public OrderStatus getOrderStatus(RadiologyOrderID radiologyOrderID) throws SOAPException {
+		System.out.println("RAD ==> Order Status Request");
 		if(orderStatuses.containsKey(radiologyOrderID.getRadiologyOrderID())) {
 			OrderStatus status = orderStatuses.get(radiologyOrderID.getRadiologyOrderID());
 			return status;
@@ -75,6 +77,7 @@ public class RadiologyServiceSkeleton implements RadiologyServiceSkeletonInterfa
 	 */
 
 	public void makePayment(RadiologyOrderIDForPayment radiologyOrderIDForPayment) throws SOAPException {
+		System.out.println("RAD ==> Make Payment Request");
 		//Set RadiologyOrder as paid
 		if(!payments.get(radiologyOrderIDForPayment.getRadiologyOrderIDForPayment())) {
 			payments.put(radiologyOrderIDForPayment.getRadiologyOrderIDForPayment(),true);
@@ -92,6 +95,7 @@ public class RadiologyServiceSkeleton implements RadiologyServiceSkeletonInterfa
 	 * @throws InterruptedException 
 	 */
 	public RadiologyOrderID orderRadiologyExamination(RadiologyOrder radiologyOrder) throws SOAPException, InterruptedException {
+		System.out.println("RAD ==> Examination Request");
 		RadiologyOrderID id = new RadiologyOrderID();
 		id.setRadiologyOrderID(String.valueOf(maxOrderId));
 		if(!orderList.containsKey(id.getRadiologyOrderID())) {
@@ -106,6 +110,7 @@ public class RadiologyServiceSkeleton implements RadiologyServiceSkeletonInterfa
 			payments.put(id.getRadiologyOrderID(), false);
 			
 			//Create a report for this order
+			System.out.println("RAD ==> Sending report");
 			RadiologyReport report = new RadiologyReport();
 			report.setRadiologyOrderID(id.getRadiologyOrderID());
 			report.setReportText("The result was very positive");
@@ -118,6 +123,7 @@ public class RadiologyServiceSkeleton implements RadiologyServiceSkeletonInterfa
 			
 			//Send the report back tot the client
 			(new Thread(new RadiologyReporter(id.getRadiologyOrderID(),reports))).start();
+			System.out.println("RAD ==> Report sent");
 		} else {
 			throw new SOAPException("Internal error: RadiologyOrderID exists.");
 		}

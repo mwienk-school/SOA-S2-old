@@ -92,6 +92,7 @@ public class PatServiceSkeleton implements PatServiceSkeletonInterface {
 
 	public void storeLabReport(
 			org.pahospital.www.patservice.LabReport labReport6) {
+		System.out.println("PAT ==> Storint lab report");
 		AccessDB db = new AccessDB();
 		Connection conn = db
 				.dbConnect(
@@ -387,6 +388,7 @@ public class PatServiceSkeleton implements PatServiceSkeletonInterface {
 
 	public void storeRadiologyReport(
 			org.pahospital.www.patservice.RadiologyReport radiologyReport15) {
+		System.out.println("PAT ==> Storint rad report");
 		AccessDB db = new AccessDB();
 		Connection conn = db
 				.dbConnect(
