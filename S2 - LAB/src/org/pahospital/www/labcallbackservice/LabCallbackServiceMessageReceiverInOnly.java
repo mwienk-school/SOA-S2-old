@@ -21,7 +21,7 @@
         // get the implementation class for the Web Service
         Object obj = getTheImplementationObject(inMessage);
 
-        LabCallbackServiceSkeleton skel = (LabCallbackServiceSkeleton)obj;
+        LabCallbackServiceSkeletonInterface skel = (LabCallbackServiceSkeletonInterface)obj;
         //Out Envelop
         org.apache.axiom.soap.SOAPEnvelope envelope = null;
         //Find the axisOperation that has been set by the Dispatch phase.

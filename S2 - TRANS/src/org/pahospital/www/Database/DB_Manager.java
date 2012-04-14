@@ -16,7 +16,7 @@ import java.util.*;
  */
 public class DB_Manager
 {
-    private static final String CONNECTION_URL = "jdbc:mysql://localhost:3306/transporDB?user=root&password=aaa";
+    private static final String CONNECTION_URL = "jdbc:mysql://localhost:3306/transporDB?user=test&password=test";
     private Connection conn;
     private static Statement stmt;
     public DB_Manager()

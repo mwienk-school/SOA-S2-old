@@ -9,19 +9,19 @@
     /**
      *  LabCallbackServiceSkeleton java skeleton for the axisService
      */
-    public class LabCallbackServiceSkeleton{
+    public class LabCallbackServiceSkeleton implements LabCallbackServiceSkeletonInterface{
         
          
         /**
          * Auto generated method signature
          * 
-                                     * @param labReport 
+                                     * @param labReport0 
              * @return  
          */
         
                  public void sendLabReport
                   (
-                  org.pahospital.www.labcallbackservice.LabReport labReport
+                  org.pahospital.www.labcallbackservice.LabReport labReport0
                   )
             {
                 //TODO : fill this with the necessary business logic

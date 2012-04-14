@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions targetNamespace="http://www.PAHospital.org/LabCallbackService/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s0="http://www.PAHospital.org/LabCallbackService/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/">
+<definitions targetNamespace="http://www.PAHospital.org/LabCallbackService/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s0="http://www.PAHospital.org/LabCallbackService/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/">
   <types>
     <xsd:schema targetNamespace="http://www.PAHospital.org/LabCallbackService/">
       <xsd:element name="LabReport">
@@ -42,7 +42,7 @@
   </binding>
   <service name="LabCallbackService">
     <port name="LabCallbackPort" binding="s0:LabCallbackBinding">
-      <soap:address location="http://www.PAHospital.org/LabCallbackService"/>
+      <soap:address location="http://localhost:8080/ode/processes/LabCallbackService"/>
     </port>
   </service>
 </definitions>
