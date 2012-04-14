@@ -16,9 +16,11 @@ public class RadiologyReporter implements Runnable {
 	public void run() {
 		RadiologyCallbackServiceStub stub;
 		try {
+			System.out.println("RAD ==> Reporter -> Wait 5 sec.");
 			Thread.sleep(5000);
 			stub = new RadiologyCallbackServiceStub();
 			stub.sendRadiologyReport(reports.get(id));
+			System.out.println("RAD ==> Reporter -> Sent!");
 		} catch (AxisFault e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
