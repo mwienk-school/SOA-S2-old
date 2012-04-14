@@ -21,7 +21,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://www.PAHospital.org/LabService/",
                 "SampleMaterial_type1",
-                "ns2");
+                "ns1");
 
             
 
@@ -36,7 +36,7 @@
 
                             // Constructor
                             
-                                protected SampleMaterial_type1(java.lang.String value, boolean isRegisterValue) {
+                                public SampleMaterial_type1(java.lang.String value, boolean isRegisterValue) {
                                     localSampleMaterial_type0 = value;
                                     if (isRegisterValue){
                                         
@@ -142,7 +142,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://www.PAHospital.org/LabService/")){
-                return "ns2";
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }

@@ -103,7 +103,7 @@
      */
     public RadiologyCallbackServiceStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"http://localhost:8080/SOA_-_Assignment_2/services/RadiologyCallbackService" );
+                    this(configurationContext,"http://localhost:8080/ode/processes/RadiologyCallbackService" );
                 
     }
 
@@ -112,7 +112,7 @@
      */
     public RadiologyCallbackServiceStub() throws org.apache.axis2.AxisFault {
         
-                    this("http://localhost:8080/SOA_-_Assignment_2/services/RadiologyCallbackService" );
+                    this("http://localhost:8080/ode/processes/RadiologyCallbackService" );
                 
     }
 
@@ -213,7 +213,7 @@
         }
         return false;
     }
-     //http://localhost:8080/SOA_-_Assignment_2/services/RadiologyCallbackService
+     //http://localhost:8080/ode/processes/RadiologyCallbackService
         public static class ExtensionMapper{
 
           public static java.lang.Object getTypeObject(java.lang.String namespaceURI,

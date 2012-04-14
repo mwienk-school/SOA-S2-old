@@ -20,7 +20,7 @@
         /* This type was generated from the piece of schema that had
                 name = LabValues_type0
                 Namespace URI = http://www.PAHospital.org/LabCallbackService/
-                Namespace Prefix = ns1
+                Namespace Prefix = ns3
                 */
             
 
@@ -186,7 +186,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://www.PAHospital.org/LabCallbackService/")){
-                return "ns1";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
