@@ -7,7 +7,7 @@ public class CreateTable
     public static void main(String[] args) 
     {
         DB db = new DB();
-        Connection conn=db.dbConnect("jdbc:derby:/home/mark/Documenten/School/1-2a-SOA/SOA - Assignment Series 2/S2 - PAT/MyDB","dimas","dimas");
+        Connection conn=db.dbConnect("jdbc:derby:/home/vincent/git/SOA-S2/S2 - PAT/MyDB","dimas","dimas");
         //db.createLabReport(conn);
         //db.createPatientRecord(conn);
         //db.createRadiologyRecord(conn);

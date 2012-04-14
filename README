@@ -33,3 +33,10 @@ Download derby van de apache website (db.apache.org/derby)
 5. Vergeet niet om de derby.jar in de lib map van  Tomcat te zetten.
 6. Zoniet, dan succes :-S
 
+HOWTO BPELUnit
+----
+1. Kies in Eclipse: Help -> Install new Software...
+2. Voeg deze update site toe: http://update.bpelunit.net
+3. Installeer de hele ellende
+4. Rechtsklikken op TestSuite -> Run as... -> BPELUnit TestSuite
+
