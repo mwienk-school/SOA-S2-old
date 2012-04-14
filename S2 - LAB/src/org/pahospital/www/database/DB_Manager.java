@@ -17,11 +17,7 @@ import org.pahospital.www.labservice.SampleMaterial_type1;
  */
 public class DB_Manager
 {
-<<<<<<< HEAD
-    private static final String CONNECTION_URL = "jdbc:mysql://localhost:3306/laboratoryDB?user=root&password=aaa";
-=======
     private static final String CONNECTION_URL = "jdbc:mysql://localhost:3306/laboratoryDB?user=test&password=test";
->>>>>>> d0e874447914baeef5d73a48bd9baa43a8456180
     private Connection conn;
     private static Statement stmt;
     public DB_Manager()

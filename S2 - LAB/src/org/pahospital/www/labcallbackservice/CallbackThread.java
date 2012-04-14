@@ -29,6 +29,7 @@ public class CallbackThread extends Thread {
 		{
 			int ID=Integer.parseInt(OrderID.substring(4));
 			try {
+				System.out.println("LAB ==> CBT -> Sending report");
 				LaboratoryOrder o=db.GetLabOrder(ID);
 				//lblNewLabel.setText("the Order will be process and send");
 				//contentPane.add(lblNewLabel);
@@ -51,6 +52,7 @@ public class CallbackThread extends Thread {
 					}
 				labrep.setLabValues(val);
 				stub.sendLabReport(labrep);
+				System.out.println("LAB ==> CBT -> Sent!");
 				LaboratoryReport rep=new LaboratoryReport();
 				rep.setOrderID(o.getOrderID());
 				rep.setPatientID(o.getPatientID());

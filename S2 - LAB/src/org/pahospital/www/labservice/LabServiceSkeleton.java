@@ -31,18 +31,19 @@ import org.pahospital.www.labcallbackservice.CallbackThread;
                   org.pahospital.www.labservice.LabOrder labOrder0
                   ) throws SQLException
                   {
-                	 System.out.println("in Labservice");
+                	 System.out.println("LAB ==> Order Labtest");
                 	 DB_Manager db=new DB_Manager();
                 	 String orderID=db.InsertlabOrder(labOrder0);
                 	 LabOrderId temp= new LabOrderId();
                 	 temp.setLabOrderId(orderID);
                 	 Random rn = new Random();
-                	 int n = 100000 + 1;
+                	 int n = 5000 + 1;
                 	 int i = rn.nextInt() % n;
                 	 if(i<0)
                 	 i= -1*i;
-                	 System.out.println("sleep time"+i);
+                	 System.out.println("LAB ==> Waiting "+i);
                      CallbackThread t= new CallbackThread(orderID,i);
+                     System.out.println("LAB ==> Sent");
                 	 t.start();
                 	 return temp;
         }
